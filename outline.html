@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritesh Kumar Singh's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Arial', sans-serif; /* Use Arial font */
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e; /* Dark background */
+            color: #f5f5f5; /* Light text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            scroll-behavior: smooth; /* Smooth scrolling */
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+            /* Dark gradient background */
+            background: linear-gradient(to bottom, #1e1e1e, #2c2c2c, #3a3a3a);
+            background-size: cover; /* Cover the entire page */
+            animation: fadeInBackground 2s ease forwards; /* Fade-in animation */
+            position: relative; /* Needed for absolute positioning of children */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Background fade-in animation */
+        @keyframes fadeInBackground {
+            from {
+                background-color: rgba(0, 0, 0, 0); /* Start transparent */
+            }
+            to {
+                background-color: #1e1e1e; /* End with dark background */
+            }
+        }
+
+        /* Header styling */
+        header {
+            text-align: right;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            display: flex;
+            justify-content: space-between; /* Space out title and icons */
+            align-items: center;
+            position: relative; /* For absolute positioning of title */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        /* Header title styling */
+        header h1 {
+            margin: 0;
+            color: #00bfff; /* Deep sky blue color */
+        }
+
+        /* Center the title in the header */
+        #title-container {
+            position: absolute;
+            left: 50%; /* Position start at center */
+            transform: translateX(-50%); /* Adjust to truly center */
+        }
+
+        /* Container for social media icons */
+        #link-icons {
+            display: flex;
+            gap: 15px; /* Space between icons */
+        }
+
+        /* Social media icon links */
+        #link-icons a {
+            color: #00bfff; /* Icon color */
+            font-size: 24px; /* Icon size */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s ease; /* Smooth color change on hover */
+        }
+
+        /* Icon link hover effect */
+        #link-icons a:hover {
+            color: #00ffff; /* Cyan color on hover */
+        }
+
+        /* Main content area styling */
+        main {
+            padding: 20px;
+            width: 90%; /* Responsive width */
+            max-width: 1000px; /* Max width for larger screens */
+            box-sizing: border-box; /* Include padding in width */
+            flex: 1; /* Allow main content to grow and fill space */
+            text-align: center; /* Center align text in sections by default */
+        }
+
+        /* General section styling */
+        .section {
+            margin-top: 40px; /* Space above sections */
+            text-align: center; /* Center align content within sections */
+        }
+
+        /* Grid layout for skills */
+        .skills-grid {
+            display: grid;
+            /* Responsive grid: columns adjust based on available width */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; /* Space between grid items */
+            margin-top: 20px; /* Space above the grid */
+        }
+
+        /* Individual skill card styling */
+        .skill-card {
+            background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Card shadow */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            color: #eee; /* Light text color for card content */
+        }
+
+        /* Skill card hover effect */
+        .skill-card:hover {
+            transform: translateY(-5px); /* Lift card slightly */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Increase shadow */
+        }
+
+        /* Skill icon styling */
+        .skill-icon {
+            font-size: 40px; /* Icon size */
+            margin-bottom: 10px; /* Space below icon */
+            color: #00bfff; /* Icon color */
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            width: 100%;
+            margin-top: 40px; /* Increased space above footer */
+            border-top: 1px solid #333; /* Subtle top border */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            color: #f5f5f5; /* Light text color */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        /* Profile picture styling */
+        #profile-picture {
+            border-radius: 50%; /* Circular image */
+            width: 150px;
+            height: 150px;
+            object-fit: cover; /* Ensure image covers the area well */
+            margin-bottom: 20px; /* Space below image */
+            border: 3px solid #00bfff; /* Blue border */
+        }
+
+        /* Grid layout for projects */
+        #project-container {
+            display: grid;
+            /* Responsive grid for projects */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px; /* Space between project cards */
+            margin-top: 20px; /* Space above the project grid */
+        }
+
+        /* Individual project card styling */
+        .project-card {
+            background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Card shadow */
+            margin-bottom: 20px; /* Space below card (relevant if not in grid, kept for consistency) */
+            text-align: left; /* Align text to the left within the card */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push content and links apart */
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            color: #eee; /* Light text color */
+        }
+
+        /* Project card hover effect */
+        .project-card:hover {
+            transform: translateY(-5px); /* Lift card slightly */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Increase shadow */
+        }
+
+        /* Project link styling */
+        .project-link {
+            color: #00bfff; /* Link color */
+            text-decoration: none; /* Remove underline */
+            margin-right: 10px; /* Space between links */
+            display: inline-block; /* Ensure margin works correctly */
+            margin-top: 10px; /* Space above links */
+        }
+
+        /* Project link hover effect */
+        .project-link:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        /* Insider Section Styles */
+        #insider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
+            margin-top: 40px; /* Space above the section */
+            position: relative;
+            padding-left: 20px; /* Indentation for the tree */
+            box-sizing: border-box;
+            width: 100%;
+            text-align: left; /* Ensure text aligns left */
+        }
+
+        /* Vertical line for the main tree trunk */
+        #insider-tree::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #00bfff; /* Blue line */
+        }
+
+        /* Styling for each branch in the tree */
+        .insider-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px; /* Space between branches */
+            position: relative;
+            width: 100%;
+            padding-left: 30px; /* Indentation for branches */
+            box-sizing: border-box;
+        }
+
+        /* Horizontal line connecting branch to trunk */
+        .insider-branch::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px; /* Adjust vertical position */
+            width: 20px;
+            height: 2px;
+            background-color: #00bfff; /* Blue line */
+        }
+
+        /* Styling for individual events/items within a branch */
+        .insider-event {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px; /* Space below each event */
+            text-align: left;
+            width: 100%; /* Take full width within the branch padding */
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            color: #eee;
+        }
+
+        /* Hover effect for insider events */
+        .insider-event:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Heading within an insider event */
+        .insider-event h3 {
+            margin-top: 0; /* Remove default top margin */
+            margin-bottom: 5px;
+            color: #00bfff; /* Blue heading */
+            font-size: 1.1em; /* Slightly smaller heading */
+        }
+
+        /* Paragraph text within insider event */
+        .insider-event p {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        /* List styling within insider event */
+        .insider-event ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            list-style-type: disc; /* Standard bullet points */
+        }
+
+        /* List item styling */
+        .insider-event li {
+            font-size: 0.95em;
+            margin-bottom: 5px; /* Space between list items */
+        }
+
+        /* Date styling (currently not used in HTML structure, but defined) */
+        .insider-date {
+            position: absolute;
+            left: -120px; /* Position date to the left of the trunk */
+            top: 0;
+            font-size: 0.9em;
+            color: #aaa; /* Light gray color */
+            white-space: nowrap; /* Prevent date from wrapping */
+        }
+
+        /* Styling for main topic titles in the insider tree */
+        .main-topic {
+            font-size: 1.3em; /* Larger font for main topics */
+            font-weight: bold;
+            margin-bottom: 15px; /* More space below main topic */
+            color: #fff; /* White color for emphasis */
+            background-color: rgba(0, 91, 255, 0.3); /* Slightly different background */
+        }
+
+        /* Styling for subtopic titles */
+        .subtopic {
+            font-size: 1.1em; /* Slightly larger than event headings */
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00bfff; /* Blue color */
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.8); /* Match event background */
+             padding: 10px 15px; /* Add padding */
+             border-radius: 8px; /* Rounded corners */
+             box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow */
+             width: auto; /* Adjust width to content */
+             display: inline-block; /* Allow inline display */
+        }
+
+        /* Styling for indented content under subtopics */
+        .indent {
+            padding-left: 0; /* Remove extra padding, handled by branch structure */
+            margin-left: 0; /* Ensure no extra margin */
+        }
+
+        /* Certificates Section */
+        #certificates-container {
+            display: flex;
+            flex-direction: column; /* Stack certificates vertically */
+            align-items: center; /* Center cards horizontally */
+            margin-top: 20px; /* Space above the container */
+            width: 100%;
+            padding: 0 20px; /* Add horizontal padding */
+            box-sizing: border-box;
+        }
+
+        /* Individual certificate card styling */
+        .certificate-card {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px; /* Space between cards */
+            text-align: center; /* Center content */
+            width: 100%;
+            max-width: 600px; /* Limit card width */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(5px);
+            color: #eee;
+        }
+
+        /* Certificate card hover effect */
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Certificate title */
+        .certificate-card h3 {
+            color: #00bfff;
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        /* Certificate image styling */
+        .certificate-card img {
+            max-width: 100%; /* Ensure image fits within card */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px; /* Slightly rounded corners for image */
+            margin-bottom: 10px;
+            border: 1px solid #444; /* Subtle border for the image */
+        }
+
+        /* Certificate description */
+        .certificate-card p {
+            font-size: 0.95em;
+            margin-bottom: 0; /* Remove bottom margin if it's the last element */
+        }
+
+        /* Contact Form Container */
+        #contact-form-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center; /* Center the form horizontally */
+            width: 100%;
+            padding: 0 20px; /* Add horizontal padding */
+            box-sizing: border-box;
+        }
+
+        /* Contact Form Styling */
+        #contact-form {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px; /* Limit form width */
+            text-align: left;
+            backdrop-filter: blur(5px);
+            box-sizing: border-box;
+        }
+
+        /* Form heading */
+        #contact-form h2 {
+            color: #00bfff;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Form labels */
+        #contact-form label {
+            display: block;
+            margin-top: 10px;
+            color: #eee;
+            font-size: 0.9em;
+            margin-bottom: 5px; /* Space below label */
+        }
+
+        /* Form input and textarea fields */
+        #contact-form input,
+        #contact-form textarea {
+            width: 100%; /* Full width within padding */
+            padding: 12px; /* Increased padding */
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #444; /* Darker border */
+            border-radius: 5px;
+            background-color: #2c2c2c; /* Slightly lighter dark background */
+            color: #eee;
+            font-size: 0.9em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        /* Focus effect for input/textarea */
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            outline: none;
+            border-color: #00bfff; /* Blue border on focus */
+            box-shadow: 0 0 5px rgba(0, 191, 255, 0.5); /* Subtle glow */
+        }
+
+        /* Textarea specific styling */
+        #contact-form textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 100px; /* Minimum height */
+        }
+
+        /* Submit button styling */
+        #contact-form button {
+            background-color: #00bfff;
+            color: #1e1e1e; /* Dark text on button */
+            padding: 12px 20px; /* Larger padding */
+            border: none;
+            border-radius: 5px;
+            font-size: 1em; /* Slightly larger font */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Submit button hover effect */
+        #contact-form button:hover {
+            background-color: #00ffff; /* Cyan on hover */
+            transform: scale(1.02); /* Slightly enlarge button */
+        }
+
+        /* Message area for form feedback */
+        #contact-form .message {
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-align: center;
+            min-height: 1.2em; /* Reserve space for message */
+        }
+
+        /* Success message styling */
+        #contact-form .success {
+            color: #00ff7f; /* Spring green */
+        }
+
+        /* Error message styling */
+        #contact-form .error {
+            color: #ff4d4d; /* Light red */
+        }
+
+        /* Background Graphics Container */
+        #background-graphics {
+            position: fixed; /* Keep graphics fixed in viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allow clicks to pass through */
+            z-index: -1; /* Place behind all other content */
+            overflow: hidden; /* Hide parts of graphics outside viewport */
+        }
+
+        /* Individual background graphic element */
+        .bg-graphic {
+            position: absolute;
+            /* --- Increased opacity --- */
+            opacity: 0.15; /* Increased base visibility */
+            animation: moveAndRotate 20s linear infinite alternate;
+            width: 150px;
+            height: 150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        /* Animation for background graphics */
+        @keyframes moveAndRotate {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0.8);
+                /* Adjust animation opacity */
+                opacity: 0.1;
+            }
+            50% {
+                 opacity: 0.18; /* Slightly higher peak opacity */
+            }
+            100% {
+                transform: translate(calc(100vw - 200px), calc(100vh - 200px)) rotate(180deg) scale(1.2);
+                 opacity: 0.1;
+            }
+        }
+
+        /* Specific background images and positions/delays */
+        #computer-graphic {
+            /* --- Using an inline SVG example --- */
+            /* A simple light blue circle */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%2300bfff' /%3E%3C/svg%3E");
+            top: 10%;
+            left: 10%;
+            animation-duration: 25s;
+        }
+
+        #trading-graphic {
+             /* NOTE: Replace this placeholder */
+             background-image: url('https://placehold.co/150x150/333333/555555?text=Trade');
+            top: 30%;
+            left: 80%;
+            animation-delay: 2s;
+            animation-duration: 30s;
+        }
+
+        #finance-graphic {
+             /* NOTE: Replace this placeholder */
+             background-image: url('https://placehold.co/150x150/333333/555555?text=Fin');
+            top: 60%;
+            left: 20%;
+            animation-delay: 4s;
+            animation-duration: 22s;
+        }
+
+        #money-graphic {
+             /* NOTE: Replace this placeholder */
+            background-image: url('https://placehold.co/150x150/333333/555555?text=Money');
+            top: 80%;
+            left: 50%;
+            animation-delay: 1s;
+             animation-duration: 28s;
+        }
+
+        #coding-graphic {
+             /* NOTE: Replace this placeholder */
+             background-image: url('https://placehold.co/150x150/333333/555555?text=Code');
+            top: 5%;
+            left: 70%;
+            animation-delay: 3s;
+             animation-duration: 20s;
+        }
+
+
+        /* Responsive Design Adjustments */
+        @media screen and (max-width: 768px) {
+            /* Stack skills cards vertically on smaller screens */
+            .skills-grid {
+                grid-template-columns: 1fr; /* Single column */
+            }
+
+            /* Adjust main content width for smaller screens */
+            main {
+                width: 95%;
+            }
+
+            /* Adjust header layout */
+             header {
+                 flex-direction: column; /* Stack title and icons */
+                 align-items: center;
+                 padding: 15px;
+             }
+             #title-container {
+                 position: static; /* Remove absolute positioning */
+                 transform: none;
+                 margin-bottom: 10px; /* Add space below title */
+             }
+             #link-icons {
+                 gap: 15px; /* Increase gap slightly if needed */
+             }
+             #link-icons a {
+                 font-size: 22px; /* Adjust icon size if needed */
+             }
+
+             /* Adjust profile picture size */
+             #profile-picture {
+                 width: 120px;
+                 height: 120px;
+             }
+
+            /* Adjust project grid */
+            #project-container {
+                grid-template-columns: 1fr; /* Single column */
+            }
+
+            /* Adjust insider tree layout */
+            #insider-container {
+                padding-left: 10px; /* Reduce left padding */
+            }
+            #insider-tree::before {
+                left: 5px; /* Adjust trunk line position */
+            }
+             .insider-branch {
+                 padding-left: 20px; /* Reduce branch indentation */
+             }
+             .insider-branch::before {
+                 width: 15px; /* Shorten branch connector line */
+                 left: 5px; /* Adjust connector position */
+             }
+             .insider-date {
+                 /* Hide or reposition date if it overlaps */
+                 display: none; /* Example: hide date on small screens */
+             }
+
+             /* Adjust contact form width */
+             #contact-form {
+                 max-width: 90%;
+             }
+
+             /* Reduce visibility or size of background graphics on smaller screens */
+             .bg-graphic {
+                 width: 100px;
+                 height: 100px;
+                 opacity: 0.1; /* Make them fainter on mobile */
+             }
+             @keyframes moveAndRotate { /* Adjust animation opacity for mobile */
+                 0% {
+                    transform: translate(0, 0) rotate(0deg) scale(0.8);
+                    opacity: 0.08;
+                 }
+                 50% {
+                    opacity: 0.12;
+                 }
+                 100% {
+                    transform: translate(calc(100vw - 150px), calc(100vh - 150px)) rotate(180deg) scale(1.2); /* Adjust translate distance */
+                    opacity: 0.08;
+                 }
+             }
+        }
+
+         @media screen and (max-width: 480px) {
+             /* Further adjustments for very small screens */
+             header h1 {
+                 font-size: 1.5em; /* Smaller header title */
+             }
+             #link-icons a {
+                 font-size: 20px; /* Smaller icons */
+                 gap: 10px; /* Reduce gap */
+             }
+             .skill-card, .project-card, .certificate-card, .insider-event, #contact-form {
+                 padding: 15px; /* Reduce padding on cards/forms */
+             }
+             #contact-form input, #contact-form textarea, #contact-form button {
+                 padding: 10px; /* Reduce padding in form elements */
+                 font-size: 0.85em;
+             }
+             body {
+                 font-size: 14px; /* Adjust base font size */
+             }
+             /* Optionally hide background graphics completely on very small screens */
+             /* #background-graphics { display: none; } */
+             .bg-graphic {
+                 width: 80px; /* Even smaller */
+                 height: 80px;
+                 opacity: 0.08; /* Even fainter */
+             }
+             @keyframes moveAndRotate { /* Further adjust animation for smallest screens */
+                 0% {
+                    transform: translate(0, 0) rotate(0deg) scale(0.7);
+                    opacity: 0.06;
+                 }
+                 50% {
+                    opacity: 0.1;
+                 }
+                 100% {
+                    transform: translate(calc(100vw - 120px), calc(100vh - 120px)) rotate(180deg) scale(1.1); /* Adjust translate distance */
+                    opacity: 0.06;
+                 }
+             }
+         }
+
+    </style>
+</head>
+<body>
+    <header>
+         <div id="title-container">
+             <h1>Welcome to My Portfolio</h1>
+         </div>
+         <div id="link-icons">
+            <a href="https://github.com/Ritsham/" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank" aria-label="Brain Icon Link"><i class="fas fa-brain"></i></a>
+            <a href="https://www.instagram.com/ritesh_mannat/" target="_blank" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/ritesh-singh-mannat/" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="section about-section">
+            <img id="profile-picture" src="https://placehold.co/150x150/00bfff/FFFFFF?text=RKS" alt="Ritesh Kumar Singh Profile Picture" onerror="this.onerror=null; this.src='https://placehold.co/150x150/cccccc/FFFFFF?text=Image+Not+Found';">
+            <h2>Ritesh Kumar Singh</h2>
+            <p>Aspiring Quant | Web Developer | ML Enthusiast | Competitive Programmer | Algo Trader</p>
+            <p>
+                I'm a curious and driven learner with a strong interest in competitive programming, mathematics, and the financial markets. I enjoy working on intellectually stimulating problems and thrive in environments that challenge me to think critically and analytically.
+            </p>
+            <p>
+                My learning approach is rooted in a deep desire to understand concepts at a fundamental level—whether it’s breaking down algorithms, exploring mathematical structures, or analyzing patterns in finance and stock behavior. I believe in building strong foundations and continuously expanding my perspective through hands-on practice and exploration.
+            </p>
+            <p>
+                I’m always excited to connect with like-minded individuals, collaborate on ideas, and keep pushing the boundaries of what I can learn and create.
+            </p>
+        </section>
+
+        <section class="section skills-section">
+            <h2>My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <h3>Competitive Programming</h3>
+                    <p>Skilled in solving complex problems and optimizing code for competitions.</p>
+                </div>
+                 <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-lightbulb"></i></div> <h3>Problem Solving</h3>
+                    <p>Strong analytical and logical reasoning skills for tackling diverse challenges.</p>
+                </div>
+                 <div class="skill-card">
+                     <div class="skill-icon"><strong>C</strong></div>
+                    <h3>C Language</h3>
+                    <p>Proficient in C for systems programming and algorithm implementation.</p>
+                </div>
+                 <div class="skill-card">
+                     <div class="skill-icon"><strong>C++</strong></div>
+                    <h3>C++</h3>
+                    <p>Experienced in C++ for high-performance computing and competitive programming.</p>
+                </div>
+                 <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-table-tennis-paddle-ball"></i></div>
+                    <h3>Table Tennis Player</h3>
+                    <p>Enjoy playing and competing in Table Tennis.</p>
+                </div>
+                 <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-music"></i></div> <h3>Flutist</h3>
+                    <p>Passionate about playing the flute.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section projects-section">
+            <h2>Projects</h2>
+            <div id="project-container">
+                <div class="project-card">
+                    <h3>Project Title 1</h3>
+                    <p>Brief description of the project. Mention the technologies used (e.g., C++, Python, React) and the purpose of the project.</p>
+                    <div> <a href="#" class="project-link" target="_blank">View Project</a>
+                        <a href="#" class="project-link" target="_blank">GitHub Repository</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Project Title 2</h3>
+                    <p>Brief description of another project. Highlight key features or challenges overcome.</p>
+                     <div>
+                        <a href="#" class="project-link" target="_blank">View Project</a>
+                        <a href="#" class="project-link" target="_blank">GitHub Repository</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Project Title 3</h3>
+                    <p>Description of a third project, perhaps focusing on a different skill area like web development or ML.</p>
+                     <div>
+                        <a href="#" class="project-link" target="_blank">View Project</a>
+                        <a href="#" class="project-link" target="_blank">GitHub Repository</a>
+                    </div>
+                </div>
+                 </div>
+        </section>
+
+        <section class="section" id="insider-section">
+            <h2>Insider - My Learning Journey</h2>
+            <div id="insider-container">
+                <div id="insider-tree">
+                    <div class="insider-branch">
+                        <div class="insider-event main-topic">[Main Topic Name Here]</div>
+
+                        <div class="insider-branch">
+                            <div class="insider-event subtopic">[Subtopic Name Here]</div>
+                            <div class="insider-event indent">
+                                <h3>What I Learned</h3>
+                                <ul>
+                                    <li>[Add learning point 1]</li>
+                                    <li>[Add learning point 2]</li>
+                                    </ul>
+                                <h3>Projects</h3>
+                                <ul>
+                                    <li>[Add related project 1]</li>
+                                    </ul>
+                                <h3>Blogs/Resources</h3>
+                                <ul>
+                                    <li>[Add relevant blog/resource link or name 1]</li>
+                                    </ul>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <section class="section" id="certificates-section">
+            <h2>Certificates</h2>
+            <div id="certificates-container">
+                <div class="certificate-card">
+                    <h3>Certificate Title 1</h3>
+                    <img src="https://placehold.co/400x250/00bfff/FFFFFF?text=Certificate+1" alt="Certificate 1 Placeholder" onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/FFFFFF?text=Image+Not+Found';">
+                    <p>Description of the certificate (e.g., "Data Structures Masterclass") and the issuing organization (e.g., "Coursera").</p>
+                </div>
+                <div class="certificate-card">
+                    <h3>Certificate Title 2</h3>
+                     <img src="https://placehold.co/400x250/00bfff/FFFFFF?text=Certificate+2" alt="Certificate 2 Placeholder" onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/FFFFFF?text=Image+Not+Found';">
+                    <p>Description of another certificate (e.g., "Introduction to Quantitative Finance") and the provider (e.g., "Udemy").</p>
+                </div>
+                 </div>
+        </section>
+
+        <section class="section" id="contact-section">
+            <h2>Contact Me</h2>
+            <div id="contact-form-container">
+                <form id="contact-form" action="#" method="POST"> <h2>Get in Touch</h2>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                    <div class="message"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ritesh Kumar Singh. All rights reserved.</p>
+    </footer>
+
+    <div id="background-graphics">
+        <div id="computer-graphic" class="bg-graphic"></div>
+        <div id="trading-graphic" class="bg-graphic"></div>
+        <div id="finance-graphic" class="bg-graphic"></div>
+        <div id="money-graphic" class="bg-graphic"></div>
+        <div id="coding-graphic" class="bg-graphic"></div>
+    </div>
+
+    <script>
+        // --- Contact Form Submission Handling (Simulation) ---
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            const form = e.target;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const messageContainer = form.querySelector('.message');
+
+            // Basic validation
+            if (!name || !email || !message) {
+                messageContainer.textContent = 'Please fill in all fields.';
+                messageContainer.className = 'message error'; // Apply error style
+                return; // Stop submission
+            }
+
+            // Basic email format check (can be more robust)
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
+                 messageContainer.textContent = 'Please enter a valid email address.';
+                 messageContainer.className = 'message error';
+                 return;
+            }
+
+            // --- Simulation Start ---
+            // In a real application, you would send data to a server here using fetch() or XMLHttpRequest
+            console.log('Form data:', { name, email, message });
+            messageContainer.textContent = 'Sending...';
+            messageContainer.className = 'message'; // Reset style
+
+            // Simulate network delay and success response
+            setTimeout(function() {
+                messageContainer.textContent = 'Message sent successfully!';
+                messageContainer.className = 'message success'; // Apply success style
+                // Clear the form fields after successful submission
+                form.reset();
+
+                 // Optionally clear the success message after a few seconds
+                 setTimeout(() => {
+                     messageContainer.textContent = '';
+                     messageContainer.className = 'message';
+                 }, 5000); // Clear after 5 seconds
+
+            }, 1500); // Simulate 1.5 second delay
+            // --- Simulation End ---
+
+             /* --- Example Fetch for Real Backend ---
+             const formData = new FormData(form);
+
+             fetch('YOUR_BACKEND_ENDPOINT_HERE', { // Replace with your server URL
+                 method: 'POST',
+                 body: formData
+             })
+             .then(response => response.json()) // Or response.text() depending on backend
+             .then(data => {
+                 console.log('Success:', data);
+                 messageContainer.textContent = 'Message sent successfully!';
+                 messageContainer.className = 'message success';
+                 form.reset();
+             })
+             .catch((error) => {
+                 console.error('Error:', error);
+                 messageContainer.textContent = 'Failed to send message. Please try again.';
+                 messageContainer.className = 'message error';
+             });
+             */
+        });
+
+        // --- Dynamically Set Profile Image ---
+        function setProfileImage() {
+            const img = document.getElementById('profile-picture');
+            // Replace placeholder URL with the actual image URL
+            const imageUrl = 'https://avatars.githubusercontent.com/u/88405529?v=4';
+            img.src = imageUrl;
+
+            // Optional: Add an error handler directly here too
+             img.onerror = function() {
+                 console.error("Failed to load profile image:", imageUrl);
+                 this.src = 'https://placehold.co/150x150/cccccc/FFFFFF?text=Not+Found'; // Fallback placeholder
+                 this.alt = 'Profile image not found';
+             };
+        }
+
+        // --- Run scripts when the window finishes loading ---
+        window.onload = function() {
+            setProfileImage();
+            // You could add other initialization functions here if needed
+        };
+    </script>
+</body>
+</html>
